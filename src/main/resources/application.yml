@@ -1,0 +1,25 @@
+#spring.cloud.stream.bindings.input.binder=kafka
+#spring.cloud.stream.bindings.output.binder=rabbit
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: test-topic
+          binder: kafka-riadh
+        output:
+          destination: test-exchange
+          binder: rabbit-riadh
+      binders:
+        kafka-riadh:
+          type: kafka
+          environment:
+            spring.cloud.stream.kafka.streams.binder:
+              brokers: 192.168.43.123 #localhost #192.168.43.123 #192.168.99.100
+              zkNodes: 192.168.43.123 #localhost #192.168.43.123
+        rabbit-riadh:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
